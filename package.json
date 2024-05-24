@@ -1,7 +1,6 @@
 {
   "name": "sg-form-lib",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "license": "MIT",
   "files": [
@@ -22,8 +21,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "postinstall": "node scripts/install.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "prop-types": "^15.8.1",

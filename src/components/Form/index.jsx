@@ -7,7 +7,7 @@ import OtherField from '../fields/OtherField';
 import SelectField from '../fields/SelectField';
 import RadioField from '../fields/RadioField';
 import FormDataLayout from '../../layouts/FormDataLayout';
-import CheckboxField from '../fields/CheckboxField';
+import CheckboxField from '../fields/CheckBoxField';
 
 /**
  * Form component dynamically generates a form based on provided configurations.
