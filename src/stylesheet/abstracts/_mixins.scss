@@ -1,0 +1,11 @@
+@mixin flexCol() {
+  display: flex;
+  flex-direction: column;
+}
+
+// mixin for media queries - mobile first
+@mixin min-media-breakpoint($breakpoint) {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}

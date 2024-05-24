@@ -1,0 +1,35 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+/// text color
+/// @type Color
+$text-color: #eee;
+
+/// black
+/// @type Color
+$black: #000000;
+
+/// white
+/// @type Color
+$white: #eee;
+
+/// error
+/// @type Color
+$error: #d63838;
+
+/// green
+/// @type Color
+$green: #168825;
+
+/// *********************** BREAKPOINTS
+$breakpoint-mobileXS: 360px;
+$breakpoint-mobile: 425px;
+$breakpoint-tablet: 768px;
+$breakpoint-laptop: 1024px;
+$breakpoint-laptopXL: 1400px;
+$breakpoint-desktop: 1440px;
+$breakpoint-desktopXL: 1580px;
+
+/// *********************** RADIUS
+$radius: 5px;
