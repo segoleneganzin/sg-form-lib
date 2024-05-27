@@ -1,14 +1,7 @@
 /***************************** NORMALIZE *****************************/
 
-body,
-h1,
-h2,
-p {
+.form,
+.form h2,
+.form p {
   margin: 0;
-}
-
-a {
-  text-decoration: none;
-  cursor: pointer;
-  width: fit-content;
 }

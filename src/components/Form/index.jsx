@@ -2,10 +2,10 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { fieldConfig } from '../../../config/fieldConfig';
+import { fieldConfig } from '../../../config/default-config';
 import OtherField from '../fields/OtherField';
-import SelectField from '../fields/SelectField';
-import RadioField from '../fields/RadioField';
+import SelectField from '../fields/SelectField/SelectField';
+import RadioField from '../fields/RadioField/RadioField';
 import FormDataLayout from '../../layouts/FormDataLayout';
 import CheckboxField from '../fields/CheckBoxField';
 

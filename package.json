@@ -1,11 +1,11 @@
 {
   "name": "sg-form-lib",
-  "version": "0.0.2",
+  "version": "0.0.8",
   "type": "module",
   "license": "MIT",
   "files": [
     "dist",
-    "./config/fieldConfig.jsx"
+    "./config/default-config.jsx"
   ],
   "main": "./dist/sg-form-lib.cjs.js",
   "module": "./dist/sg-form-lib.es.js",
