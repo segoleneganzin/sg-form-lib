@@ -64,7 +64,7 @@ const Form = ({
   }, [fieldNames, fieldValue, setValue]);
 
   /**
-   * Function to get the error class for a given field.
+   * Function to get the error class for a given field and manage if display is necessary (error or not).
    * @param {string} field - Name of the field.
    * @returns {string} - Error class for the field.
    */

@@ -16,11 +16,21 @@
   padding: 20px;
   position: relative;
   width: 100%;
+  &__section-title {
+    @include flexCol;
+    align-items: center;
+  }
   &__title {
     border-bottom: solid 2px $white;
     font-size: 2rem;
     letter-spacing: 0.2cap;
     padding-bottom: 20px;
+  }
+  &__subtitle {
+    font-size: 0.825rem;
+    margin: auto;
+    padding-top: 10px;
+    width: 90%;
   }
   &__content {
     @include flexCol;
