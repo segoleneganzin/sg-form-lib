@@ -29,13 +29,124 @@ const handleForm = (email, password)
 
 ## Champs prédéfinis
 
+Par défaut les champs sont requis. <br>
+
 Les champs prédéfinis incluent :
 
-- Name (input)
-- Password (input de type password)
-- Gender (radio button)
-- Country (select)
-- Food Allergies (checkbox)
+- email (input) <br>
+- password (input de type password)
+- passwordConfirmation (input de type password)
+- name (input)
+- age (input type number)
+- tel (input)
+- message (textarea)
+- otherInfos (textarea)
+- gender (radio button)
+- country (select)
+- foodAllergies (checkbox)
+  <br>
+  Exemples :
+- Input : <br>
+
+```jsx
+  email: {
+    label: 'Email',
+    type: 'email',
+    pattern: /\S+@\S+\.\S+/,
+    fieldErrorMessage: 'Veuillez renseigner votre email',
+    isRequired,
+  },
+```
+
+- Textarea : <br>
+
+```jsx
+  message: {
+    tag: 'textarea',
+    label: 'Message',
+    type: 'text',
+    fieldErrorMessage: 'Veuillez renseigner votre message',
+    isRequired,
+  },
+```
+
+- Radio buttons : <br>
+
+```jsx
+  gender: {
+    tag: 'radio',
+    type: 'radio',
+    label: 'Genre',
+    fieldErrorMessage: 'Veuillez renseigner votre genre',
+    isRequired,
+    radios: [
+      {
+        label: 'Homme',
+        value: 'Homme',
+        name: 'male',
+      },
+      {
+        label: 'Femme',
+        value: 'Femme',
+        name: 'female',
+      },
+    ],
+  },
+```
+
+- Select : <br>
+
+```jsx
+  country: {
+    tag: 'select',
+    label: 'Pays',
+    defaultValue: 'Choisir une option',
+    fieldErrorMessage: 'Veuillez renseigner votre pays',
+    isRequired,
+    options: [
+      {
+        label: 'Angleterre',
+        value: 'Angleterre',
+      },
+      {
+        label: 'Espagne',
+        value: 'Espagne',
+      },
+      {
+        label: 'France',
+        value: 'France',
+      },
+    ],
+  },
+```
+
+- Checkboxes : <br>
+
+```jsx
+  foodAllergies: {
+    tag: 'checkbox',
+    type: 'checkbox',
+    label: 'Allergie(s) alimentaire(s)',
+    isRequired: false,
+    checkboxes: [
+      {
+        label: 'Gluten',
+        value: 'gluten',
+        name: 'gluten',
+      },
+      {
+        label: 'Arachides',
+        value: 'peanuts',
+        name: 'peanuts',
+      },
+      {
+        label: 'Lactose',
+        value: 'milk',
+        name: 'milk',
+      },
+    ],
+  },
+```
 
 ## Personnalisation des champs
 
