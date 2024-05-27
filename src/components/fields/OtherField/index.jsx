@@ -8,7 +8,7 @@ const OtherField = ({ fieldName, field, register, inputErrorClass }) => {
       name={fieldName}
       type={field.type}
       className={
-        `form__${field.tag || 'input'}` + inputErrorClass(fieldName) // into css : form__input / form__textarea, ...
+        `sg-form-lib__${field.tag || 'input'}` + inputErrorClass(fieldName) // into css : sg-form-lib__input / sg-form-lib__textarea, ...
       }
       {...register(fieldName, {
         required: field.isRequired,

@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { fieldConfig } from '../../../config/default-config';
+import { defaultFieldConfig } from '../../../config/default-config';
 import OtherField from '../fields/OtherField';
 import SelectField from '../fields/SelectField/SelectField';
 import RadioField from '../fields/RadioField/RadioField';
@@ -24,6 +24,7 @@ import CheckboxField from '../fields/CheckBoxField';
  * @returns {JSX.Element} The JSX element for the form.
  */
 const Form = ({
+  fieldsConfig = defaultFieldConfig, // default parameter if user don't set his proper config
   title,
   subtitle,
   btnText,
@@ -63,23 +64,6 @@ const Form = ({
   }, [fieldNames, fieldValue, setValue]);
 
   /**
-   * Translates field names to their French equivalents when necessary.
-   * @param {string} value - The field name to translate.
-   * @returns {string} The translated field name.
-   */
-  const translation = (value) => {
-    const translations = {
-      name: 'nom',
-      password: 'mot de passe',
-      passwordConfirmation: 'mot de passe identique',
-      country: 'pays',
-      gender: 'genre',
-      animals: 'animaux adoptés',
-    };
-    return translations[value] || value;
-  };
-
-  /**
    * Function to get the error class for a given field.
    * @param {string} field - Name of the field.
    * @returns {string} - Error class for the field.
@@ -93,19 +77,19 @@ const Form = ({
       onSubmit={handleSubmit(() =>
         onSubmitFunction(...fieldNames.map((fieldName) => getValues(fieldName)))
       )}
-      className='form'
+      className='sg-form-lib'
       noValidate // validate by useForm hook
     >
       {/* Titles section */}
-      <div className='form__section-title'>
-        {title && <h2 className='title form__title'>{title}</h2>}
-        {subtitle && <p className='subtitle form__subtitle'>{subtitle}</p>}
+      <div className='sg-form-lib__section-title'>
+        {title && <h2 className='sg-form-lib__title'>{title}</h2>}
+        {subtitle && <p className='sg-form-lib__subtitle'>{subtitle}</p>}
       </div>
 
       {/* form content (fields + validation message + submit button) */}
-      <div className='form__content'>
+      <div className='sg-form-lib__content'>
         {fieldNames.map((fieldName, index) => {
-          const field = fieldConfig[fieldName];
+          const field = fieldsConfig[fieldName];
           const commonProps = {
             fieldName,
             field,
@@ -118,7 +102,6 @@ const Form = ({
               fieldName={fieldName}
               field={field}
               errors={errors}
-              translation={translation}
               key={index}
             >
               {field.tag === 'select' ? (
@@ -134,9 +117,9 @@ const Form = ({
           );
         })}
 
-        <p className='form__message--validation'>{validationMessage}</p>
-        <p className='form__message--error'>{errorMessage}</p>
-        <button type='submit' className='btn'>
+        <p className='sg-form-lib__message--validation'>{validationMessage}</p>
+        <p className='sg-form-lib__message--error'>{errorMessage}</p>
+        <button type='submit' className='sg-form-lib__btn'>
           {btnText}
         </button>
       </div>
@@ -144,10 +127,11 @@ const Form = ({
   );
 };
 Form.propTypes = {
-  onSubmitFunction: PropTypes.func.isRequired,
-  btnText: PropTypes.string.isRequired,
+  fieldsConfig: PropTypes.object,
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  btnText: PropTypes.string.isRequired,
+  onSubmitFunction: PropTypes.func.isRequired,
   validationMessage: PropTypes.string,
   errorMessage: PropTypes.string,
   fieldNames: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
 const RadioField = ({ fieldName, field, register }) => (
-  <div className='form__radios'>
+  <div className='sg-form-lib__radios'>
     {field.radios.map((radio, index) => {
       return (
-        <div key={index} className='form__radio'>
+        <div key={index} className='sg-form-lib__radio'>
           <input
             id={radio.name}
             name={fieldName}

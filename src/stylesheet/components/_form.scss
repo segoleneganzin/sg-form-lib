@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Open+Sans:ital,wght@0,300..800;1,300..800');
 
-.form {
+.sg-form-lib {
   @include flexCol;
   // ****** Typography
   font-family: 'Open Sans', sans-serif;
@@ -82,7 +82,7 @@
       color: $error;
     }
   }
-  .btn {
+  &__btn {
     background-color: #08d;
     border: 0;
     border-radius: $radius;

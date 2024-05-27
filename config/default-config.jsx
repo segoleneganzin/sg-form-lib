@@ -4,34 +4,54 @@
 // default pattern = null
 // label and type are always required
 const isRequired = true; // default isRequired
-export const fieldConfig = {
+export const defaultFieldConfig = {
   email: {
     label: 'Email',
     type: 'email',
     pattern: /\S+@\S+\.\S+/,
-    isRequired,
-  },
-  passwordConfirmation: {
-    label: 'Confirmer le mot de passe :',
-    type: 'password',
-    pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+    fieldErrorMessage: 'Veuillez renseigner votre email',
     isRequired,
   },
   password: {
     label: 'Mot de passe',
     type: 'password',
     pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+    fieldErrorMessage: 'Veuillez renseigner votre mot de passe',
     isRequired,
   },
+  passwordConfirmation: {
+    label: 'Confirmer le mot de passe :',
+    type: 'password',
+    pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+    fieldErrorMessage: 'Veuillez confirmer votre mot de passe',
+    isRequired,
+  },
+  name: {
+    label: 'Nom',
+    type: 'text',
+    fieldErrorMessage: 'Veuillez renseigner votre nom',
+    isRequired,
+  },
+  age: {
+    label: 'Âge',
+    type: 'number',
+    fieldErrorMessage: 'Veuillez renseigner votre âge',
+    isRequired,
+  },
+  tel: {
+    label: 'Téléphone',
+    type: 'text',
+    fieldErrorMessage: 'Veuillez renseigner votre numéro de téléphone',
+    isRequired,
+  },
+  // textarea
   message: {
     tag: 'textarea',
     label: 'Message',
     type: 'text',
+    fieldErrorMessage: 'Veuillez renseigner votre message',
     isRequired,
   },
-  name: { label: 'Nom', type: 'text', isRequired },
-  age: { label: 'Âge', type: 'number', isRequired },
-  tel: { label: 'Téléphone', type: 'text', isRequired },
   otherInfos: {
     tag: 'textarea',
     label: 'Autre(s) information(s)',
@@ -43,6 +63,7 @@ export const fieldConfig = {
     tag: 'radio',
     type: 'radio',
     label: 'Genre',
+    fieldErrorMessage: 'Veuillez renseigner votre genre',
     isRequired,
     radios: [
       {
@@ -62,6 +83,7 @@ export const fieldConfig = {
     tag: 'select',
     label: 'Pays',
     defaultValue: 'Choisir une option',
+    fieldErrorMessage: 'Veuillez renseigner votre pays',
     isRequired,
     options: [
       {
@@ -79,26 +101,26 @@ export const fieldConfig = {
     ],
   },
   // checkboxes
-  animals: {
+  foodAllergies: {
     tag: 'checkbox',
     type: 'checkbox',
-    label: 'Animaux déjà adoptés',
+    label: 'Allergie(s) alimentaire(s)',
     isRequired: false,
     checkboxes: [
       {
-        label: 'Chien',
-        value: 'chien',
-        name: 'dog',
+        label: 'Gluten',
+        value: 'gluten',
+        name: 'gluten',
       },
       {
-        label: 'Chat',
-        value: 'chat',
-        name: 'cat',
+        label: 'Arachides',
+        value: 'peanuts',
+        name: 'peanuts',
       },
       {
-        label: 'NAC',
-        value: 'NAC',
-        name: 'nac',
+        label: 'Lactose',
+        value: 'milk',
+        name: 'milk',
       },
     ],
   },

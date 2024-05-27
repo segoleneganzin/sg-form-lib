@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
 const CheckboxField = ({ fieldName, field, register }) => (
-  <div className='form__checkboxes'>
+  <div className='sg-form-lib__checkboxes'>
     {field.checkboxes.map((checkbox, index) => {
       return (
-        <div key={index} className='form__checkbox'>
+        <div key={index} className='sg-form-lib__checkbox'>
           <input
             id={checkbox.name}
             name={fieldName}

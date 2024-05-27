@@ -1,23 +1,17 @@
 import PropTypes from 'prop-types';
-const FormDataLayout = ({
-  children,
-  fieldName,
-  field,
-  errors,
-  translation,
-}) => {
+const FormDataLayout = ({ children, fieldName, field, errors }) => {
   return (
-    <div className='form__data'>
+    <div className='sg-form-lib__data'>
       {/* label */}
-      <label htmlFor={fieldName} className='form__label'>
+      <label htmlFor={fieldName} className='sg-form-lib__label'>
         {field.label}
       </label>
       {/* content - manage into Form.jsx */}
       {children}
       {/* error message */}
-      <p className='form__data--error'>
+      <p className='sg-form-lib__data--error'>
         {errors[fieldName]?.type === 'required' && (
-          <>Veuillez entrer votre {translation(fieldName)}</>
+          <>{field.fieldErrorMessage}</>
         )}
         {errors[fieldName]?.type === 'pattern' && <>Champ invalide</>}
       </p>
@@ -29,6 +23,5 @@ FormDataLayout.propTypes = {
   fieldName: PropTypes.string.isRequired,
   field: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  translation: PropTypes.func.isRequired,
 };
 export default FormDataLayout;

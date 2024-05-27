@@ -6,7 +6,7 @@ const SelectField = ({ fieldName, field, register, inputErrorClass }) => (
     name={fieldName}
     type={field.type}
     className={
-      `form__select` + inputErrorClass(fieldName) // into css : form__input / form__textarea, ...
+      `sg-form-lib__select` + inputErrorClass(fieldName) // into css : sg-form-lib__input / sg-form-lib__textarea, ...
     }
     {...register(fieldName, {
       required: field.isRequired,
