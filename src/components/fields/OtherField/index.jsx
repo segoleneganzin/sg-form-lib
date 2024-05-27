@@ -18,6 +18,7 @@ const OtherField = ({ fieldName, field, register, inputErrorClass }) => {
       id={fieldName}
       name={fieldName}
       type={field.type}
+      step={field.step && field.step}
       className={
         `sg-form-lib__${field.tag || 'input'}` + inputErrorClass(fieldName) // into css : sg-form-lib__input / sg-form-lib__textarea, ...
       }

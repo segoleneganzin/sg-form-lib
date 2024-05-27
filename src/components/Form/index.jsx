@@ -132,6 +132,7 @@ const Form = ({
   );
 };
 Form.propTypes = {
+  formId: PropTypes.string,
   fieldsConfig: PropTypes.object,
   title: PropTypes.string,
   subtitle: PropTypes.string,
