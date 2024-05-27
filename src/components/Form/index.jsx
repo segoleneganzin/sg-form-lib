@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { defaultFieldConfig } from '../../../config/default-config';
@@ -24,6 +24,7 @@ import CheckboxField from '../fields/CheckBoxField';
  * @returns {JSX.Element} The JSX element for the form.
  */
 const Form = ({
+  formId,
   fieldsConfig = defaultFieldConfig, // default parameter if user don't set his proper config
   title,
   subtitle,
@@ -42,6 +43,8 @@ const Form = ({
     setValue,
     formState: { errors },
   } = useForm();
+
+  const form = useRef();
 
   /**
    * Effect to set initial values for fields if provided.
@@ -78,6 +81,8 @@ const Form = ({
         onSubmitFunction(...fieldNames.map((fieldName) => getValues(fieldName)))
       )}
       className='sg-form-lib'
+      id={formId}
+      ref={form}
       noValidate // validate by useForm hook
     >
       {/* Titles section */}

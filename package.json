@@ -1,6 +1,6 @@
 {
   "name": "sg-form-lib",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Librairie simplifiant la création de formulaires. La documentation arrive prochainement.",
   "type": "module",
   "license": "MIT",
