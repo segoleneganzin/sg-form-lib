@@ -45,7 +45,9 @@ Les champs prédéfinis incluent :
 - country (select)
 - foodAllergies (checkbox)
   <br>
-  Exemples :
+
+### Exemples :
+
 - Input : <br>
 
 ```jsx
