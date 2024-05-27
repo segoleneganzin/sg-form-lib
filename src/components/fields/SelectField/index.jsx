@@ -20,7 +20,6 @@ const SelectField = ({ fieldName, field, register, inputErrorClass }) => (
     }
     {...register(fieldName, {
       required: field.isRequired,
-      validate: field.validate && field.validate, // verify if field validate a personnalized function (ex : isLevelValid for a number between 25 and 100, and multiple of 5)
     })}
   >
     <option value=''>{field.defaultValue}</option>

@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { defaultFieldConfig } from '../../../config/default-config';
 import OtherField from '../fields/OtherField';
-import SelectField from '../fields/SelectField/SelectField';
-import RadioField from '../fields/RadioField/RadioField';
-import FormDataLayout from '../../layouts/FormDataLayout';
+import SelectField from '../fields/SelectField';
+import RadioField from '../fields/RadioField';
 import CheckboxField from '../fields/CheckBoxField';
+import FormDataLayout from '../../layouts/FormDataLayout';
 
 /**
  * Form component dynamically generates a form based on provided configurations.
