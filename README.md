@@ -13,7 +13,7 @@ L'action à réaliser à l'envoi du formulaire se fait via la prop `onSubmitFunc
 Attention a bien passer les paramètres de cette fonction dans le même ordre que les champs car la récupération des données se fait automatiquement en allant du premier champ au dernier champ. <br>
 Exemple : <br>
 
-````jsx
+```jsx
 const handleForm = (email, password)
 <Form
         fieldsConfig={fieldConfigPerso}
@@ -23,8 +23,9 @@ const handleForm = (email, password)
         validationMessage={validationMessage}
         errorMessage={errorMessage}
         fieldNames={['email', 'password']}
-      />
-      ```
+/>
+
+```
 
 ## Champs prédéfinis
 
@@ -50,7 +51,7 @@ Pensez au préalable à importer votre fichier : <br>
 
 ```jsx
 import { fieldConfigPerso } from '../fieldConfigPerso';
-````
+```
 
 ## Classes CSS utilisées
 
