@@ -25,6 +25,7 @@ const OtherField = ({ fieldName, field, register, inputErrorClass }) => {
       {...register(fieldName, {
         required: field.isRequired,
         pattern: field.pattern || null, // null by default, if the information isn't set into fieldConfig
+        validate: field.validate && field.validate, // verify if field validate a personnalized function (ex : isLevelValid for a number between 25 and 100, and multiple of 5)
       })}
     />
   );
