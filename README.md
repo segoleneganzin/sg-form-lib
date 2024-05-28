@@ -193,7 +193,7 @@ Pour personnaliser le style des formulaires, vous pouvez utiliser les classes CS
 
 ## Pré-remplissage du formulaire
 
-Vous pouvez pré-remplir le formulaire avec des données en utilisant la prop `fieldValue`, qui doit être un objet JSON contenant les données. Le nom du champ dans les données doit correspondre au `fieldName` du formulaire.
+Vous pouvez pré-remplir le formulaire avec des données en utilisant la prop `fieldValue`, qui doit être un objet JSON contenant les données. Le nom du champ dans les données doit correspondre au `fieldName` du formulaire. <br>
 
 Exemple :
 
@@ -293,7 +293,7 @@ const DemoConnexion = () => {
 export default DemoForm;
 ```
 
-### API
+### Composant Form
 
 `Form`composant <br>
 Composant permettant de générer un formulaire dynamiquement.<br>
