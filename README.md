@@ -1,6 +1,7 @@
 # sg form lib
 
-Librairie simplifiant la création de formulaires. <br>
+Librairie ReactJS simplifiant la création de formulaires. <br>
+La validation du formulaire utilise useForm de React. <br>
 
 ## Introduction
 
@@ -296,6 +297,17 @@ export default DemoForm;
 
 `Form`composant <br>
 Composant permettant de générer un formulaire dynamiquement.<br>
+Ce composant bénéficie d'une ref 'form' : <br>
+` const form = useRef();`<br>
+`<form
+      onSubmit={handleSubmit(() =>
+        onSubmitFunction(...fieldNames.map((fieldName) => getValues(fieldName)))
+      )}
+      className='sg-form-lib'
+      id={formId}
+      ref={form}
+      noValidate // validate by useForm hook
+    > `
 
 Props<br>
 
@@ -308,3 +320,4 @@ Props<br>
 - validationMessage (string) : Le message de validation à afficher. (Facultatif)<br>
 - errorMessage (string) : Le message d'erreur à afficher. (Facultatif)<br>
 - fieldValue (object) : Les valeurs initiales des champs. (Facultatif)<br>
+- id (string) : l'id correspondant au form.
