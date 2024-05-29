@@ -23,7 +23,7 @@ const CheckboxField = ({ fieldName, field, register }) => (
             })}
             value={checkbox.value}
           />
-          <label htmlFor={checkbox.name}>{checkbox.value}</label>
+          <label htmlFor={checkbox.name}>{checkbox.label}</label>
         </div>
       );
     })}
