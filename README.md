@@ -293,13 +293,13 @@ const DemoConnexion = () => {
 export default DemoForm;
 ```
 
-### Composant Form
+### Props du composant Form
 
-`Form`composant <br>
-Composant permettant de générer un formulaire dynamiquement.<br>
 Ce composant bénéficie d'une ref 'form' : <br>
 ` const form = useRef();`<br>
-`<form
+
+````jsx
+<form
       onSubmit={handleSubmit(() =>
         onSubmitFunction(...fieldNames.map((fieldName) => getValues(fieldName)))
       )}
@@ -307,9 +307,8 @@ Ce composant bénéficie d'une ref 'form' : <br>
       id={formId}
       ref={form}
       noValidate // validate by useForm hook
-    > `
-
-Props<br>
+    >
+    ```
 
 - btnText (string, required) : Le texte du bouton de soumission du formulaire.<br>
 - onSubmitFunction (function, required) : La fonction à appeler lors de la soumission du formulaire.<br>
@@ -321,3 +320,4 @@ Props<br>
 - errorMessage (string) : Le message d'erreur à afficher. (Facultatif)<br>
 - fieldValue (object) : Les valeurs initiales des champs. (Facultatif)<br>
 - id (string) : l'id correspondant au form.
+````
