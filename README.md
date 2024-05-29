@@ -3,11 +3,11 @@
 Librairie ReactJS simplifiant la création de formulaires. <br>
 La validation du formulaire utilise useForm de React. <br>
 
-[Voir la librairie sur nom](https://www.npmjs.com/package/sg-form-lib)
+[Voir la librairie sur npm](https://www.npmjs.com/package/sg-form-lib)
 
 [Tester la librairie sur CodeSandBox](https://codesandbox.io/p/devbox/sg-form-lib-test-2zrpn6?file=%2Fsrc%2Fpages%2FHome.jsx%3A23%2C10)
 
-[Site de démonstration](https://codesandbox.io/p/devbox/sg-form-lib-test-2zrpn6?file=%2Fsrc%2Fpages%2FHome.jsx%3A23%2C10)
+[Site de démonstration](https://sg-form-lib-demo.vercel.app/)
 
 ## Introduction
 
