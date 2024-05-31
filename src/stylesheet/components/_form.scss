@@ -65,6 +65,9 @@
   }
   &__input {
     height: 45px;
+    &--error {
+      border-color: $error;
+    }
   }
   &__textarea {
     height: 200px;

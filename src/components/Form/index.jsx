@@ -72,7 +72,7 @@ const Form = ({
    * @returns {string} - Error class for the field.
    */
   const inputErrorClass = (field) => {
-    return errors[field] ? ' input-error' : '';
+    return errors[field] ? ' sg-form-lib__input--error' : '';
   };
 
   return (
