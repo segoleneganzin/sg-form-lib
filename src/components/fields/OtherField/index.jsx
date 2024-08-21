@@ -8,23 +8,44 @@ import PropTypes from 'prop-types';
  * @param {string} props.fieldName - The name of the field.
  * @param {Object} props.field - The configuration object for the field.
  * @param {function} props.register - The register function from useForm hook.
- * @param {function} props.inputErrorClass - The function to get the error class for a given field.
+ * @param {function} props.fieldErrorClass - The function to get the error class for a given field.
+ * @param {function} props.handleChange
  * @returns {JSX.Element} - The JSX element for the form field.
  */
-const OtherField = ({ fieldName, field, register, inputErrorClass }) => {
-  const Tag = field.tag || 'input';
+const OtherField = ({
+  fieldName,
+  field,
+  register,
+  fieldErrorClass,
+  handleChange,
+}) => {
+  const {
+    tag = 'input',
+    type,
+    hidden = false,
+    step = null,
+    fieldClass = '',
+    isRequired = true,
+    pattern = null,
+  } = field;
+  const Tag = tag;
   return (
     <Tag
       id={fieldName}
       name={fieldName}
-      type={field.type}
-      step={field.step && field.step}
-      className={
-        `sg-form-lib__${field.tag || 'input'}` + inputErrorClass(fieldName) // into css : sg-form-lib__input / sg-form-lib__textarea, ...
-      }
+      type={type}
+      step={step}
+      className={`sg-form-lib__${tag} ${fieldClass}  ${
+        hidden && ' hidden'
+      } ${fieldErrorClass(fieldName)}`}
       {...register(fieldName, {
-        required: field.isRequired,
-        pattern: field.pattern || null, // null by default, if the information isn't set into fieldConfig
+        required: isRequired,
+        pattern: pattern,
+        onChange: (e) => {
+          if (handleChange) {
+            handleChange(e);
+          }
+        },
       })}
     />
   );
@@ -32,9 +53,18 @@ const OtherField = ({ fieldName, field, register, inputErrorClass }) => {
 
 OtherField.propTypes = {
   fieldName: PropTypes.string.isRequired,
-  field: PropTypes.object.isRequired,
+  field: PropTypes.shape({
+    tag: PropTypes.string,
+    type: PropTypes.string.isRequired,
+    hidden: PropTypes.bool,
+    step: PropTypes.number,
+    fieldClass: PropTypes.string,
+    isRequired: PropTypes.bool,
+    pattern: PropTypes.instanceOf(RegExp),
+  }).isRequired,
   register: PropTypes.func.isRequired,
-  inputErrorClass: PropTypes.func.isRequired,
+  fieldErrorClass: PropTypes.func.isRequired,
+  handleChange: PropTypes.func,
 };
 
 export default OtherField;

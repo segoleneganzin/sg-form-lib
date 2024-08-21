@@ -11,19 +11,28 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} The JSX element for the form data layout.
  */
 const FormDataLayout = ({ children, fieldName, field, errors }) => {
+  const {
+    label,
+    type,
+    fieldErrorMessage = 'Veuillez renseigner ce champs',
+    hidden = false,
+  } = field;
   return (
-    <div className='sg-form-lib__data'>
+    <div className={`sg-form-lib__data ${hidden ? 'hidden' : ''}`}>
       {/* label */}
-      <label htmlFor={fieldName} className='sg-form-lib__label'>
-        {field.label}
-      </label>
+      {label &&
+        (type === 'checkbox' || type === 'radio' ? (
+          <p className='sg-form-lib__label'>{label}</p>
+        ) : (
+          <label htmlFor={fieldName} className='sg-form-lib__label'>
+            {label}
+          </label>
+        ))}
       {/* content - manage into Form.jsx */}
       {children}
       {/* error message */}
       <p className='sg-form-lib__data--error'>
-        {errors[fieldName]?.type === 'required' && (
-          <>{field.fieldErrorMessage}</>
-        )}
+        {errors[fieldName]?.type === 'required' && <>{fieldErrorMessage}</>}
         {errors[fieldName]?.type === 'pattern' && <>Champ invalide</>}
       </p>
     </div>
@@ -32,7 +41,12 @@ const FormDataLayout = ({ children, fieldName, field, errors }) => {
 FormDataLayout.propTypes = {
   children: PropTypes.element.isRequired,
   fieldName: PropTypes.string.isRequired,
-  field: PropTypes.object.isRequired,
+  field: PropTypes.shape({
+    label: PropTypes.string,
+    title: PropTypes.string,
+    fieldErrorMessage: PropTypes.string,
+    hidden: PropTypes.bool,
+  }).isRequired,
   errors: PropTypes.object.isRequired,
 };
 export default FormDataLayout;

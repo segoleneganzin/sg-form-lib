@@ -9,6 +9,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, 'src/index.jsx'),
       name: 'sg-form-lib',
       fileName: (format) => `sg-form-lib.${format}.js`,
+      formats: ['cjs', 'es'],
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
@@ -19,5 +20,8 @@ export default defineConfig({
         },
       },
     },
+    outDir: 'dist',
+    sourcemap: true, // Generates source maps for debugging.
+    emptyOutDir: true, // Clears the output directory before building.
   },
 });

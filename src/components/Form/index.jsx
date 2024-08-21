@@ -5,8 +5,7 @@ import { useForm } from 'react-hook-form';
 import { defaultFieldConfig } from '../../../config/default-config';
 import OtherField from '../fields/OtherField';
 import SelectField from '../fields/SelectField';
-import RadioField from '../fields/RadioField';
-import CheckboxField from '../fields/CheckBoxField';
+import CheckField from '../fields/CheckField';
 import FormDataLayout from '../../layouts/FormDataLayout';
 
 /**
@@ -21,11 +20,12 @@ import FormDataLayout from '../../layouts/FormDataLayout';
  * @param {string} props.errorMessage - The error message to display.
  * @param {Array<string>} props.fieldNames - The names of the fields to include in the form. [required]
  * @param {Object} props.fieldValue - The initial values for the fields.
+ * @param {function} props.onFieldChange - The function to call on field value change.
  * @returns {JSX.Element} The JSX element for the form.
  */
 const Form = ({
   formId,
-  fieldsConfig = defaultFieldConfig, // default parameter if user don't set his proper config
+  fieldsConfig = defaultFieldConfig,
   title,
   subtitle,
   btnText,
@@ -34,12 +34,12 @@ const Form = ({
   errorMessage,
   fieldNames,
   fieldValue,
+  onFieldChange,
 }) => {
   // Destructuring properties from the useForm hook
   const {
     register,
     handleSubmit,
-    getValues,
     setValue,
     formState: { errors },
   } = useForm();
@@ -51,46 +51,65 @@ const Form = ({
    * e.g. for update form
    */
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        fieldNames.forEach((fieldName) => {
-          setValue(fieldName, fieldValue[fieldName]);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    // if props is set
     if (fieldValue) {
-      fetchPost();
+      fieldNames.forEach((fieldName) => {
+        setValue(fieldName, fieldValue[fieldName]);
+      });
     }
   }, [fieldNames, fieldValue, setValue]);
+
+  /**
+   * Manage onChange fields
+   */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    onFieldChange && onFieldChange(name, value);
+  };
+
+  const handleSubmitFunction = (data) => {
+    const formData = fieldNames.reduce((acc, fieldName) => {
+      acc[fieldName] = data[fieldName];
+      return acc;
+    }, {});
+    onSubmitFunction(formData);
+  };
 
   /**
    * Function to get the error class for a given field and manage if display is necessary (error or not).
    * @param {string} field - Name of the field.
    * @returns {string} - Error class for the field.
    */
-  const inputErrorClass = (field) => {
-    return errors[field] ? ' sg-form-lib__input--error' : '';
+  const fieldErrorClass = (fieldName) => {
+    return errors[fieldName] ? ' sg-form-lib__field--error' : '';
+  };
+
+  const renderField = (field, commonProps) => {
+    switch (field.type) {
+      case 'select':
+        return <SelectField {...commonProps} />;
+      case 'radio':
+      case 'checkbox':
+        return <CheckField {...commonProps} />;
+      default:
+        return <OtherField {...commonProps} />;
+    }
   };
 
   return (
     <form
-      onSubmit={handleSubmit(() =>
-        onSubmitFunction(...fieldNames.map((fieldName) => getValues(fieldName)))
-      )}
+      onSubmit={handleSubmit(handleSubmitFunction)}
       className='sg-form-lib'
       id={formId}
       ref={form}
       noValidate // validate by useForm hook
     >
       {/* Titles section */}
-      <div className='sg-form-lib__section-title'>
-        {title && <h2 className='sg-form-lib__title'>{title}</h2>}
-        {subtitle && <p className='sg-form-lib__subtitle'>{subtitle}</p>}
-      </div>
-
+      {(title || subtitle) && (
+        <div className='sg-form-lib__section-title'>
+          {title && <h2 className='sg-form-lib__title'>{title}</h2>}
+          {subtitle && <p className='sg-form-lib__subtitle'>{subtitle}</p>}
+        </div>
+      )}
       {/* form content (fields + validation message + submit button) */}
       <div className='sg-form-lib__content'>
         {fieldNames.map((fieldName, index) => {
@@ -99,7 +118,8 @@ const Form = ({
             fieldName,
             field,
             register,
-            inputErrorClass,
+            fieldErrorClass,
+            handleChange,
           };
 
           return (
@@ -109,15 +129,7 @@ const Form = ({
               errors={errors}
               key={index}
             >
-              {field.tag === 'select' ? (
-                <SelectField {...commonProps} />
-              ) : field.tag === 'radio' ? (
-                <RadioField {...commonProps} />
-              ) : field.tag === 'checkbox' ? (
-                <CheckboxField {...commonProps} />
-              ) : (
-                <OtherField {...commonProps} />
-              )}
+              {renderField(field, commonProps)}
             </FormDataLayout>
           );
         })}
@@ -142,5 +154,7 @@ Form.propTypes = {
   errorMessage: PropTypes.string,
   fieldNames: PropTypes.arrayOf(PropTypes.string).isRequired,
   fieldValue: PropTypes.object,
+  onFieldChange: PropTypes.func,
 };
+
 export default Form;

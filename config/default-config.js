@@ -2,46 +2,41 @@
 // default tag = input
 // default pattern = null
 // label and type are always required
-const isRequired = true; // default value
 export const defaultFieldConfig = {
   email: {
     label: 'Email',
     type: 'email',
     pattern: /\S+@\S+\.\S+/,
     fieldErrorMessage: 'Veuillez renseigner votre email',
-    isRequired,
+    hidden: true,
+    fieldClass: 'test',
   },
   password: {
     label: 'Mot de passe',
     type: 'password',
     pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
     fieldErrorMessage: 'Veuillez renseigner votre mot de passe',
-    isRequired,
   },
   passwordConfirmation: {
     label: 'Confirmer le mot de passe :',
     type: 'password',
     pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
     fieldErrorMessage: 'Veuillez confirmer votre mot de passe',
-    isRequired,
   },
   name: {
     label: 'Nom',
     type: 'text',
     fieldErrorMessage: 'Veuillez renseigner votre nom',
-    isRequired,
   },
   age: {
     label: 'Âge',
     type: 'number',
     fieldErrorMessage: 'Veuillez renseigner votre âge',
-    isRequired,
   },
   tel: {
     label: 'Téléphone',
     type: 'text',
     fieldErrorMessage: 'Veuillez renseigner votre numéro de téléphone',
-    isRequired,
   },
   // textarea
   message: {
@@ -49,7 +44,6 @@ export const defaultFieldConfig = {
     label: 'Message',
     type: 'text',
     fieldErrorMessage: 'Veuillez renseigner votre message',
-    isRequired,
   },
   otherInfos: {
     tag: 'textarea',
@@ -57,14 +51,13 @@ export const defaultFieldConfig = {
     type: 'text',
     isRequired: false,
   },
+
   // radio buttons
   gender: {
-    tag: 'radio',
     type: 'radio',
-    label: 'Genre',
+    title: 'Genre',
     fieldErrorMessage: 'Veuillez renseigner votre genre',
-    isRequired,
-    radios: [
+    options: [
       {
         label: 'Homme',
         value: 'Homme',
@@ -74,16 +67,16 @@ export const defaultFieldConfig = {
         label: 'Femme',
         value: 'Femme',
         name: 'female',
+        checked: true,
       },
     ],
   },
   // select
   country: {
-    tag: 'select',
+    type: 'select',
     label: 'Pays',
     defaultValue: 'Choisir une option',
     fieldErrorMessage: 'Veuillez renseigner votre pays',
-    isRequired,
     options: [
       {
         label: 'Angleterre',
@@ -101,11 +94,10 @@ export const defaultFieldConfig = {
   },
   // checkboxes
   foodAllergies: {
-    tag: 'checkbox',
     type: 'checkbox',
-    label: 'Allergie(s) alimentaire(s)',
+    title: 'Allergie(s) alimentaire(s)',
     isRequired: false,
-    checkboxes: [
+    options: [
       {
         label: 'Gluten',
         value: 'gluten',
