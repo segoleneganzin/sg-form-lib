@@ -11,28 +11,39 @@ La validation du formulaire utilise useForm de React. <br>
 
 ## Introduction
 
-Cette librairie contient un composant `Form` qui permet de créer facilement des formulaires, en utilisant soit des champs prédéfinis dans la librairie, soit en ajoutant vos propres champs.<br>
-Les champs prédéfinis vous offrent une structure de base pour créer vos formulaires.<br>
-La gestion des erreurs est prise en compte. <br>
-Il est possible d'ajouter des patterns et de définir quels champs sont requis. <br>
-Il suffit de mettre les props adaptées. <br>
-La sélection des champs se fait dans la prop `fieldNames`, ensuite le formulaire va automatiquement récupérer les données nécessaires dans le fichier de configuration. <br>
-L'action à réaliser à l'envoi du formulaire se fait via la prop `onSubmitFunction`, à laquelle vous passez la fonction souhaitée.<br>
-Attention à bien passer les paramètres de cette fonction dans le même ordre que les champs car la récupération des données se fait automatiquement en allant du premier champ au dernier champ. <br>
-Exemple : <br>
+Cette librairie contient un composant `Form` qui permet de créer
+facilement des formulaires, en utilisant soit des champs prédéfinis
+dans la librairie, soit en ajoutant vos propres champs. <br />
+Les champs prédéfinis vous offrent une structure de base pour créer
+vos formulaires. <br />
+La gestion des erreurs est prise en compte. <br />
+Il est possible d'ajouter des patterns. <br />
+Les champs sont, par défaut, requis. <br />
+La séléction des champs que vous souhaitez mettre dans le formulaire
+se fait via la prop{' '}
+`fieldNames`, ensuite le
+formulaire va automatiquement récupérer les données nécessaires dans
+le fichier de configuration. <br />
+L'action à réaliser à l'envoi du formulaire se fait via la
+prop `onSubmitFunction`, à
+laquelle vous passez la fonction souhaitée.
+<br />
+Exemple : <br />
 
 ```jsx
-const handleForm = (email, password)
-<Form
-        fieldsConfig={fieldConfigPerso}
-        title={'Se connecter'}
-        btnText={'Connexion'}
-        onSubmitFunction={handleForm}
-        validationMessage={validationMessage}
-        errorMessage={errorMessage}
-        fieldNames={['email', 'password']}
-/>
+const handleForm = (formFieldsData) => {
+  // what to do on submit
+};
 
+<Form
+  fieldsConfig={fieldConfigPerso}
+  title={'Se connecter'}
+  btnText={'Connexion'}
+  onSubmitFunction={handleForm}
+  validationMessage={validationMessage}
+  errorMessage={errorMessage}
+  fieldNames={['email', 'password']}
+/>;
 ```
 
 ## Champs prédéfinis
@@ -59,46 +70,43 @@ Les champs prédéfinis incluent :
 - Input : <br>
 
 ```jsx
-  email: {
+   email: {
     label: 'Email',
     type: 'email',
     pattern: /\S+@\S+\.\S+/,
     fieldErrorMessage: 'Veuillez renseigner votre email',
-    isRequired,
   },
 ```
 
 - Textarea : <br>
 
 ```jsx
-  message: {
-    tag: 'textarea',
-    label: 'Message',
-    type: 'text',
-    fieldErrorMessage: 'Veuillez renseigner votre message',
-    isRequired,
-  },
+    message: {
+      tag: 'textarea',
+      label: 'Message',
+      type: 'text',
+      fieldErrorMessage: 'Veuillez renseigner votre message',
+    },
 ```
 
 - Radio buttons : <br>
 
 ```jsx
   gender: {
-    tag: 'radio',
     type: 'radio',
     label: 'Genre',
     fieldErrorMessage: 'Veuillez renseigner votre genre',
-    isRequired,
-    radios: [
+    options: [
       {
         label: 'Homme',
-        value: 'Homme',
+        value: 'male',
         name: 'male',
       },
       {
         label: 'Femme',
-        value: 'Femme',
+        value: 'female',
         name: 'female',
+        checked: true,
       },
     ],
   },
@@ -108,23 +116,22 @@ Les champs prédéfinis incluent :
 
 ```jsx
   country: {
-    tag: 'select',
+    type: 'select',
     label: 'Pays',
-    defaultValue: 'Choisir une option',
+    defaultValue: 'Choisir votre pays',
     fieldErrorMessage: 'Veuillez renseigner votre pays',
-    isRequired,
     options: [
       {
         label: 'Angleterre',
-        value: 'Angleterre',
+        value: 'england',
       },
       {
         label: 'Espagne',
-        value: 'Espagne',
+        value: 'spain',
       },
       {
         label: 'France',
-        value: 'France',
+        value: 'france',
       },
     ],
   },
@@ -134,11 +141,10 @@ Les champs prédéfinis incluent :
 
 ```jsx
   foodAllergies: {
-    tag: 'checkbox',
     type: 'checkbox',
     label: 'Allergie(s) alimentaire(s)',
     isRequired: false,
-    checkboxes: [
+    options: [
       {
         label: 'Gluten',
         value: 'gluten',
@@ -174,6 +180,98 @@ Pensez au préalable à importer votre fichier : <br>
 import { fieldConfigPerso } from '../fieldConfigPerso';
 ```
 
+## Paramètres des champs
+
+Pour les champs input et textarea : <br/>
+
+```jsx
+            label: 'Label', // string - obligatoire
+            type: 'text', // string - obligatoire
+            tag: 'textarea' // string - facultatif, input par défaut si non spécifié
+            hidden: true // boolean - facultatif, masquer un champs, false par défaut si non spécifié
+            step: 5 // number - facultatif, pour les champs de type number
+            fieldClass: 'custom-field' // string - facultatif, pour ajouter une classe personnalisée
+            isRequired: false // boolean - facultatif, true par défaut si non spécifié
+            pattern: /\S+@\S+\.\S+/, // regexp - facultatif, null par défaut si non spécifié
+            fieldErrorMessage: 'Veuillez écrire quelquechose ici' // string - facultatif, 'Veuillez renseigner ce champs' par défaut
+```
+
+Pour les champs select : <br/>
+
+```jsx
+            label: 'Label', // string - obligatoire
+            type: 'select', // string - obligatoire
+            fieldClass: 'custom-field' // string - facultatif, pour ajouter une classe personnalisée
+            defaultValue: 'Choisir votre option', // string - facultatif, 'Choisir une option' par défaut si non spécifié
+            fieldErrorMessage: 'Veuillez renseigner le champs', // string - facultatif, 'Veuillez renseigner ce champs' par défaut
+            isRequired: false, // boolean - facultatif, true par défaut si non spécifié
+            options: [ // array d'objets - obligatoire
+            {
+                label: 'Angleterre',
+                value: 'Angleterre',
+            },
+            {
+                label: 'Espagne',
+                value: 'Espagne',
+            },
+            {
+                label: 'France',
+                value: 'France',
+            },
+            ],
+```
+
+Pour les champs radio et checkbox : <br/>
+
+```jsx
+            label: 'Label', // string - obligatoire
+            type: 'radio', // string - obligatoire
+            fieldClass: 'custom-field' // string - facultatif, pour ajouter une classe personnalisée
+            fieldErrorMessage: 'Veuillez renseigner le champs', // string - facultatif, 'Veuillez renseigner ce champs' par défaut
+            isRequired: false, // boolean - facultatif, true par défaut si non spécifié
+            options: [ // array d'objets - obligatoire
+                    {
+                        label: 'Homme',
+                        value: 'male',
+                        name: 'male',
+                    },
+                    {
+                        label: 'Femme',
+                        value: 'female',
+                        name: 'female',
+                        checked: true, // pour cocher un élément par défaut
+                    },
+            ],
+```
+
+## Props du composant Form
+
+Ce composant bénéficie d'une ref 'form' : <br>
+` const form = useRef();`<br>
+
+```jsx
+<form
+      onSubmit={handleSubmit(() =>
+        onSubmitFunction(...fieldNames.map((fieldName) => getValues(fieldName)))
+      )}
+      className='sg-form-lib'
+      id={formId}
+      ref={form}
+      noValidate // validate by useForm hook
+    >
+```
+
+- formId (string) : l'id correspondant au form. <br/>
+- fieldsConfig (object) : La configuration des champs. (Facultatif, utilise la configuration par défaut si non spécifiée)<br/>
+- title (string) : Le titre du formulaire. (Facultatif)<br/>
+- subtitle (string) : Le sous-titre du formulaire. (Facultatif)<br/>
+- btnText (string, required) : Le texte du bouton de soumission du formulaire.<br/>
+- onSubmitFunction (function, required) : La fonction à appeler lors de la soumission du formulaire.<br/>
+- validationMessage (string) : Le message de validation à afficher. (Facultatif)<br/>
+- errorMessage (string) : Le message d'erreur à afficher. (Facultatif)<br/>
+- fieldNames (array of strings, required) : Les noms des champs à inclure dans le formulaire.<br/>
+- fieldValue (object) : Les valeurs initiales des champs. (Facultatif)<br/>
+
 ## Classes CSS utilisées
 
 Le composant Form a une largeur de 100%, penser à le mettre dans un container <br>
@@ -191,7 +289,7 @@ Pour personnaliser le style des formulaires, vous pouvez utiliser les classes CS
 - sg-form-lib\_\_data--error
 - sg-form-lib\_\_label
 - sg-form-lib\_\_input
-- sg-form-lib\_\_input--error
+- sg-form-lib\_\_field--error
 - sg-form-lib\_\_textarea
 - sg-form-lib\_\_checkboxes
 - sg-form-lib\_\_checkbox
@@ -301,31 +399,6 @@ const DemoConnexion = () => {
 export default DemoForm;
 ```
 
-### Props du composant Form
+```
 
-Ce composant bénéficie d'une ref 'form' : <br>
-` const form = useRef();`<br>
-
-````jsx
-<form
-      onSubmit={handleSubmit(() =>
-        onSubmitFunction(...fieldNames.map((fieldName) => getValues(fieldName)))
-      )}
-      className='sg-form-lib'
-      id={formId}
-      ref={form}
-      noValidate // validate by useForm hook
-    >
-    ```
-
-- btnText (string, required) : Le texte du bouton de soumission du formulaire.<br>
-- onSubmitFunction (function, required) : La fonction à appeler lors de la soumission du formulaire.<br>
-- fieldNames (array of strings, required) : Les noms des champs à inclure dans le formulaire.<br>
-- fieldsConfig (object) : La configuration des champs. (Facultatif, utilise la configuration par défaut si non spécifiée)<br>
-- title (string) : Le titre du formulaire. (Facultatif)<br>
-- subtitle (string) : Le sous-titre du formulaire. (Facultatif)<br>
-- validationMessage (string) : Le message de validation à afficher. (Facultatif)<br>
-- errorMessage (string) : Le message d'erreur à afficher. (Facultatif)<br>
-- fieldValue (object) : Les valeurs initiales des champs. (Facultatif)<br>
-- id (string) : l'id correspondant au form.
-````
+```

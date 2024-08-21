@@ -8,8 +8,6 @@ export const defaultFieldConfig = {
     type: 'email',
     pattern: /\S+@\S+\.\S+/,
     fieldErrorMessage: 'Veuillez renseigner votre email',
-    hidden: true,
-    fieldClass: 'test',
   },
   password: {
     label: 'Mot de passe',
@@ -55,19 +53,18 @@ export const defaultFieldConfig = {
   // radio buttons
   gender: {
     type: 'radio',
-    title: 'Genre',
+    label: 'Genre',
     fieldErrorMessage: 'Veuillez renseigner votre genre',
     options: [
       {
         label: 'Homme',
-        value: 'Homme',
+        value: 'male',
         name: 'male',
       },
       {
         label: 'Femme',
-        value: 'Femme',
+        value: 'female',
         name: 'female',
-        checked: true,
       },
     ],
   },
@@ -75,7 +72,7 @@ export const defaultFieldConfig = {
   country: {
     type: 'select',
     label: 'Pays',
-    defaultValue: 'Choisir une option',
+    defaultValue: 'Choisir votre pays',
     fieldErrorMessage: 'Veuillez renseigner votre pays',
     options: [
       {
@@ -95,7 +92,7 @@ export const defaultFieldConfig = {
   // checkboxes
   foodAllergies: {
     type: 'checkbox',
-    title: 'Allergie(s) alimentaire(s)',
+    label: 'Allergie(s) alimentaire(s)',
     isRequired: false,
     options: [
       {

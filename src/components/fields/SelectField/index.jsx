@@ -23,7 +23,7 @@ const SelectField = ({
     type,
     fieldClass = ' ',
     isRequired = true,
-    defaultValue,
+    defaultValue = 'Choisir une option',
   } = field;
   return (
     <select
