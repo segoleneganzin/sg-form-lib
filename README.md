@@ -357,21 +357,27 @@ Assurez-vous de l'importer avant tout autre CSS pour pouvoir le personnaliser co
 ```jsx
 import { useState } from 'react';
 import { Form } from 'sg-form-lib';
-import data from '../assets/data.json';
-import { fieldConfigPerso } from '../fieldConfigPerso';
+import datas from '../assets/datas.json';
+import { fieldConfigPerso } from '../utils/fieldConfigPerso';
 
 const DemoConnexion = () => {
   const [validationMessage, setValidationMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleForm = (email, password) => {
+  const handleForm = (formDatas) => {
     try {
-      setErrorMessage('');
-      if (email === data.email && password !== data.password) {
+      if (
+        formDatas.email === datas.email &&
+        formDatas.password !== datas.password
+      ) {
         throw new Error('Mot de passe incorrect');
       }
-      if (email === data.email && password === data.password) {
+      if (
+        formDatas.email === datas.email &&
+        formDatas.password === datas.password
+      ) {
         // Here you can manage action when form is well submitted
+        setErrorMessage('');
         setValidationMessage('Formulaire envoyé');
       } else {
         throw new Error('Combinaison incorrect');
@@ -381,6 +387,7 @@ const DemoConnexion = () => {
       setErrorMessage(error.message);
     }
   };
+
   return (
     <div className='container'>
       <Form
@@ -396,9 +403,5 @@ const DemoConnexion = () => {
   );
 };
 
-export default DemoForm;
-```
-
-```
-
+export default DemoConnexion;
 ```
